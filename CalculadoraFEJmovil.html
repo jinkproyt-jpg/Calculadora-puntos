@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <!-- CLAVE para móviles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de puntos de torneos</title>
+
+    <style>
+        :root {
+            --bg-main: #050013;
+            --bg-card: rgba(18, 10, 40, 0.96);
+            --accent: #a855f7;
+            --accent-soft: rgba(168, 85, 247, 0.3);
+            --accent-strong: #7c3aed;
+            --text-main: #f9f5ff;
+            --text-muted: #c4b5fd;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            padding: 24px 12px;
+            display: flex;
+            justify-content: center;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color: var(--text-main);
+            background:
+                radial-gradient(circle at top left, #6d28d9 0, #1f1037 35%, #050013 70%),
+                radial-gradient(circle at bottom right, #0f172a 0, #050013 55%);
+            overflow-x: hidden;
+        }
+
+        /* Contenedor principal para centrar en móviles y PC */
+        .app {
+            width: 100%;
+            max-width: 540px;
+            position: relative;
+        }
+
+        /* Dibujo de la cabeza de perro como background-image */
+        .skull {
+            position: fixed;
+            left: 4%;
+            top: 8%;
+            width: 150px;
+            height: 340px;
+            background-image: url("perro.png"); 
+            /* Si usas Base64, pon aquí:
+               background-image: url("data:image/png;base64,....");
+            */
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            filter: grayscale(100%) contrast(1.3) brightness(1.1);
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        h1 {
+            margin: 0 0 20px;
+            text-align: center;
+            font-size: clamp(1.6rem, 5vw, 2.4rem);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #e9d5ff, #a855f7, #38bdf8);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        form,
+        #resultado {
+            width: 100%;
+            background: var(--bg-card);
+            border-radius: 18px;
+            padding: 16px 18px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            box-shadow:
+                0 18px 35px rgba(15, 23, 42, 0.65),
+                0 0 0 1px rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(16px);
+        }
+
+        label {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 8px 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            background: rgba(15, 23, 42, 0.9);
+            color: var(--text-main);
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s, transform 0.1s;
+        }
+
+        input[type="number"]:focus,
+        select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 1px var(--accent-soft), 0 0 18px rgba(168, 85, 247, 0.35);
+            transform: translateY(-1px);
+        }
+
+        input[type="checkbox"] {
+            accent-color: var(--accent);
+            transform: scale(1.1);
+        }
+
+        button {
+            margin-top: 8px;
+            width: 100%;
+            padding: 10px 22px;
